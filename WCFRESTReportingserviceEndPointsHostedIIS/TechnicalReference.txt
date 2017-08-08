@@ -1,0 +1,59 @@
+﻿For  error
+	HTTP Error 500.24 - Internal Server Error
+	An ASP.NET setting has been detected that does not apply in Integrated managed pipeline mode.
+
+	referred http://stackoverflow.com/questions/14445252/http-error-500-24-internal-server-error-an-asp-net-setting-has-been-detected-t
+
+For error
+
+	HTTP 404. The resource you are looking for (or one of its dependencies) could have been removed, had its name changed, or is temporarily unavailable. Please review the following URL and make sure that it is spelled correctly 
+	
+	Add Service Reference doesn't work for REST endpoints, which is also an indication that if it works for you, then you're not using a REST endpoint.
+	WE SHOULD NOT ADD PROJECT REFERENCE FOR HOST- I REMOVED IT AND THEN WORKED
+	http://stackoverflow.com/questions/6103358/restful-wcf-service-returns-the-resource-cannot-be-found-error
+
+For error
+
+	The type 'WCFRESTReportingservice.RESTReportingservice', provided as the Service attribute value in the ServiceHost directive, or provided in the configuration element system.serviceModel/serviceHostingEnvironment/serviceActivations could not be found.
+
+	Enabled basic authentication for the service
+
+Now service acessible but cant call URI
+	Request Error
+	The server encountered an error processing the request. See server logs for more details.
+
+For error
+
+	Request Error: The server encountered an error processing the request. See server logs for more details
+	 need to includeexceptiondetailInfaults attribute to true in servicedebug tag.
+	Hide   Copy Code
+	<servicebehaviors>
+			<behavior name="myServiceBehavior">
+			  <servicedebug includeexceptiondetailinfaults="true" />
+			</behavior>
+	</servicebehaviors>
+
+ADDED REFERENCE TO PROJECT -ITS RIGHT
+
+Got the below error when  its int Id , so converted it to string
+        //Operation 'GetWCFRESTEmployee' in contract 'IWCFRESTEmployeeservice' has a path variable named 'Id' which does not have type 'string'.  Variables for UriTemplate path segments must have type 'string'
+
+        //More idea https://social.msdn.microsoft.com/Forums/vstudio/en-US/969ce363-4c0f-4642-b751-35e517336b0d/wcf-rest-variables-for-uritemplate-path-segments-must-have-type-string?forum=wcf
+        //can invoke the service with int input parameter this way - http://localhost/WCFRESTReportingserviceEndpointsHostedIIS/WCFRESTReportingservice.svc/empbyid/?Id=7
+
+
+    //        Currently, the type of variables for UriTemplate path segments is limited to type 'string'. For above sample, you can move id to query part:
+    //[OperationContract]
+    //        [WebGet(UriTemplate = "Entity/?id={id}")]
+    //        Entity Find(Int32 id);
+
+    //        [OperationContract]
+    //        [WebGet(UriTemplate = "/Entity/?data={data}", RequestFormat = WebMessageFormat.Json)]
+    //        String GetData(String data);
+
+    //        This accepted a JSON String of: {"FirstName":"John","MiddleName":"H","LastName":"Doe"}
+    //    the complete REST request was as follows:
+
+    //http://localhost:8081/SampleRESTWebService/Service.svc/Entity/?data={"FirstName":"John","MiddleName":"H","LastName":"Doe"}
+
+
